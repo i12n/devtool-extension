@@ -1,0 +1,39 @@
+{
+  "name": "工具",
+  "version": "0.1",
+  "description": "工具",
+  "devtools_page": "./devtool/devtools.html",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "http://*/*",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "tool",
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "backend.js", "devtool/backend.js"
+  ],
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches" : ["http://*/*", "https://*/*"],
+      "js": ["inject.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+	// "update_url": "http://127.0.0.1:8080"
+}
