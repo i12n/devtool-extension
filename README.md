@@ -105,19 +105,20 @@ chrome.devtools.panels.create(
 - 事件监听
 
 	```
-chrome.devtools.network.onRequestFinished.addListener(function(request) {
+	chrome.devtools.network.onRequestFinished.addListener(function(request) {
 		chrome.devtools.inspectedWindow.eval('console.log(unescape("' + escape(request.request.url) + '"))');
-});
+	});
 
 	chrome.devtools.network.onNavigated.addListener(function(request) {
-		chrome.devtools.network.getHAR(function(result) {
+	  	chrome.devtools.network.getHAR(function(result) {
 			var entries = result.entries;
 			chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(result) + ')');
 		});
-}
-
+	}
 	```
-	
 
+## 相关文档
 
+- [https://developer.chrome.com/extensions](https://developer.chrome.com/extensions)
+- [https://developer.chrome.com/extensions/devtools](https://developer.chrome.com/extensions/devtools)
 
