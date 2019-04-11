@@ -1,33 +1,33 @@
-// // Create a new panel
-// chrome.devtools.panels.create(
-//   "Custom Panel",
-//   null,
-//   "devtool/panel.html",
-//   function(panel, result) {
-//     // onShown, onHidden, onSearch
-//   }
-// );
+// Create a new panel
+chrome.devtools.panels.create(
+  "Custom Panel",
+  null,
+  "devtool/panel.html",
+  function(panel, result) {
+    // onShown, onHidden, onSearch
+  }
+);
 
-// function getChildren(sidebar) {
-//   return function() {
-//     sidebar.setExpression('$0.children', 'children');
-//   }
-// }
+function getChildren(sidebar) {
+  return function() {
+    sidebar.setExpression('$0.children', 'children');
+  }
+}
 
-// //  Create a new elements sidebar
-// chrome.devtools.panels.elements.createSidebarPane("Custom Sidebar", function(sidebar)
-// { 
-//   var showChild = getChildren(sidebar);
-//   showChild();
-//   chrome.devtools.panels.elements.onSelectionChanged.addListener(showChild);
-// });
+//  Create a new elements sidebar
+chrome.devtools.panels.elements.createSidebarPane("Custom Sidebar", function(sidebar)
+{ 
+  var showChild = getChildren(sidebar);
+  showChild();
+  chrome.devtools.panels.elements.onSelectionChanged.addListener(showChild);
+});
 
-// // Create a new sources sidebar
-// chrome.devtools.panels.sources.createSidebarPane("Custom Sidebar", function(sidebar)
-// {
-//   sidebar.setPage('devtool/peppa.html');
-//   sidebar.setHeight("800px");
-// });
+// Create a new sources sidebar
+chrome.devtools.panels.sources.createSidebarPane("Custom Sidebar", function(sidebar)
+{
+  sidebar.setPage('devtool/peppa.html');
+  sidebar.setHeight("800px");
+});
 
 // // request css
 // var x = new XMLHttpRequest();
@@ -57,14 +57,14 @@
 //   chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(res)+ ');');
 // })
 
-// // 更改 source 文件时候触发
-// chrome.devtools.inspectedWindow.onResourceContentCommitted.addListener(function(resource, content) {
-//   // resource.getContent(function(_content, _encoding) {
-//   //   chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(_content) + ');');
-//   // })
-//   // resource.setContent('change', false); // true 和 false 保存、暂存
-//   chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(resource) + ');');
-// })
+// 更改 source 文件时候触发
+chrome.devtools.inspectedWindow.onResourceContentCommitted.addListener(function(resource, content) {
+  resource.getContent(function(_content, _encoding) {
+    chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(_content) + ');');
+  })
+  // resource.setContent('change', false); // true 和 false 保存、暂存
+  chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(resource) + ');');
+})
 
 // // setTimeout(function() {
 // //   chrome.devtools.inspectedWindow.reload()
@@ -80,11 +80,10 @@
 // //   chrome.devtools.inspectedWindow.eval('console.log(unescape("' + escape(request.request.url) + '"))');
 // // })
 
-// chrome.devtools.network.getHAR(function(result) {
-//   var entries = result.entries;
-//   chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(result) + ')');
-
-// });
+chrome.devtools.network.getHAR(function(result) {
+  var entries = result.entries;
+  chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(result) + ')');
+});
 
 // chrome.devtools.network.onNavigated.addListener(function(request) {
 //   chrome.devtools.network.getHAR(function(result) {
@@ -93,13 +92,13 @@
 //   });
 // })
 
-// chrome.devtools.network.addRequestHeaders({
-//   "X-PROXY-HOSTNAME": "HOSTNAME"
-// });
+chrome.devtools.network.addRequestHeaders({
+  "X-PROXY-HOSTNAME": "HOSTNAME"
+});
 
-// // for (var key in chrome.devtools.panels) {
-// //   chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(key) + ')');
-// // }
+for (var key in chrome.devtools.panels) {
+  chrome.devtools.inspectedWindow.eval('console.log(' + JSON.stringify(key) + ')');
+}
 
 
 // Injecting a Content Script
